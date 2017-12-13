@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="card_corner_radius">20dp</dimen>
+</resources>
