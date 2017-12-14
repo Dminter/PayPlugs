@@ -15,6 +15,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
+import com.jetradarmobile.snowfall.SnowfallView;
 import com.zncm.dminter.payplugs.R;
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.CardInfo;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.Xutils;
