@@ -2,6 +2,7 @@ package com.zncm.dminter.payplugs.lawnchair.zncm.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.zncm.dminter.payplugs.App;
+import com.zncm.dminter.payplugs.SettingActivity;
 import com.zncm.dminter.payplugs.lawnchair.zncm.autocommand.AndroidCommand;
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.CardInfo;
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.Constant;
@@ -26,6 +28,37 @@ import java.util.List;
 
 public class Xutils {
 
+
+    /**
+     * 是否安装了xxx应用
+     */
+    public static boolean hasInstalledApp(Context context, String pkgName) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo info = pm.getPackageInfo(pkgName, 0);
+            return info != null;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    /*
+     *获取程序的版本号
+     */
+    public static String getAppVersion(String packname) {
+
+        try {
+            PackageManager pm = App.getInstance().ctx.getPackageManager();
+            PackageInfo packinfo = pm.getPackageInfo(packname, 0);
+            return packinfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
 
     public static void runCard(CardInfo cardInfo) {
         if (cardInfo == null) {
@@ -98,6 +131,16 @@ public class Xutils {
             quick(cardInfo, cmd);
             return;
         }
+
+        if (cmd.startsWith(SuggestIntent.activity_dl)) {
+//            cmd = cmd.substring(SuggestIntent.activity_dl.length());
+            if (SuggestIntent.activity_setting.equals(cmd)){
+                App.getInstance().startActivity(new Intent( App.getInstance(),SettingActivity.class));
+            }
+            return;
+        }
+
+
 
 
         Xutils.RunOpenActivity runOpenActivity = new Xutils.RunOpenActivity(cardInfo, Constant.open_ac_attempt);

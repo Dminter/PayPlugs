@@ -10,22 +10,23 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.CardInfo;
+import com.zncm.dminter.payplugs.lawnchair.zncm.data.Constant;
+import com.zncm.dminter.payplugs.lawnchair.zncm.utils.SPHelper;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.SuggestIntent;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.Xutils;
 import com.zncm.dminter.payplugs.view.BottomSheetDlg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     Activity ctx;
+    List<CardInfo> cardInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                     | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -43,18 +44,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void initPlugs() {
-//        final ArrayList<Map<String, Object>> list = new ArrayList<>();
-        final List<CardInfo> cardInfos = SuggestIntent.initIntent();
-//        if (Xutils.listNotNull(cardInfos)) {
-//            for (CardInfo cardInfo : cardInfos
-//                    ) {
-//                Map<String, Object> map = new HashMap<>();
-//                map.put("text", cardInfo.getTitle());
-//                map.put("card", cardInfo);
-//                list.add(map);
-//            }
-//
-//        }
+        List<CardInfo> temp = SuggestIntent.initIntent();
+        if (Xutils.listNotNull(temp)) {
+            if (!SPHelper.isRootMode(ctx)) {
+                for (CardInfo cardInfo : temp
+                        ) {
+                    if (Xutils.isEmptyOrNull(cardInfo.getPackageName()) || cardInfo.getPackageName().equals(Constant.pkg_name)) {
+                        cardInfos.add(cardInfo);
+                    }
+                }
+            } else {
+                cardInfos.addAll(temp);
+            }
+        }
+        cardInfos.add(new CardInfo(Constant.pkg_name, R.drawable.settings, SuggestIntent.activity_setting, "设置"));
         new BottomSheetDlg(ctx, cardInfos, false) {
             @Override
             public void onGridItemClickListener(int position) {

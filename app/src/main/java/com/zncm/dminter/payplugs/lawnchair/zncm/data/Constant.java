@@ -15,4 +15,5 @@ public class Constant {
     public static String no_open = "打开失败~请检查应用是否已被卸载！！";
     public static final String app_is_disable_error = "Error type 3";
     public static final String pkg_name = "com.zncm.dminter.payplugs";
+    public static final String update_url = "https://www.coolapk.com/apk/com.zncm.dminter.payplugs";
 }

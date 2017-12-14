@@ -1,5 +1,6 @@
 package com.zncm.dminter.payplugs.lawnchair.zncm.utils;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -19,5 +20,31 @@ public class SPHelper {
         sp.edit().putString(pkgName, suggestIntent).commit();
     }
 
+
+
+
+    public static boolean isSnowFall(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean("is_snowfall", true);
+    }
+
+    public static void setIsSnowFall(Context context, boolean is_snowfall) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putBoolean("is_snowfall", is_snowfall).commit();
+    }
+
+
+
+
+
+    public static boolean isRootMode(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean("is_root_mode", false);
+    }
+
+    public static void setIsRootMode(Context context, boolean is_root_mode) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putBoolean("is_root_mode", is_root_mode).commit();
+    }
 
 }

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +11,14 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 
 import com.jetradarmobile.snowfall.SnowfallView;
 import com.zncm.dminter.payplugs.R;
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.CardInfo;
+import com.zncm.dminter.payplugs.lawnchair.zncm.utils.SPHelper;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.Xutils;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -37,29 +34,26 @@ public abstract class BottomSheetDlg {
 
         final Dialog dialog = new Dialog(activity, R.style.MaterialDialogSheet);
         View view = activity.getLayoutInflater().inflate(R.layout.bottom_gridview, null);
+        if (Xutils.listNotNull(cardInfos) && cardInfos.size() >= 16) {
+            view = activity.getLayoutInflater().inflate(R.layout.bottom_gridview_half, null);
+        }
         GridView gridView = (GridView) view.findViewById(R.id.gridView);
         RelativeLayout popupWindow = (RelativeLayout) view.findViewById(R.id.popupWindow);
+        SnowfallView mSnowfallView = (SnowfallView) view.findViewById(R.id.mSnowfallView);
+
+        if (SPHelper.isSnowFall(activity)){
+            mSnowfallView.setVisibility(View.VISIBLE);
+        }
+
         popupWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-//        String from[] = {"text"};
-//        int to[] = {R.id.text};
-        //4排以上，固定高度
-        if (Xutils.listNotNull(cardInfos) && cardInfos.size() >= 8) {
-            gridView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Xutils.dip2px(360)));
-
-        }
         MyGridAdapter myGridAdapter = new MyGridAdapter(activity);
-
-
         gridView.setAdapter(myGridAdapter);
-
         myGridAdapter.setItem(cardInfos);
-//        gridView.setAdapter(new SimpleAdapter(activity, list, R.layout.bottom_item, from, to));
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

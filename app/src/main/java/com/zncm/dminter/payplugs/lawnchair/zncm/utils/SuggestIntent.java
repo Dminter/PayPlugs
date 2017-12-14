@@ -52,6 +52,8 @@ public class SuggestIntent {
     public static String browser_dl = "browser://";
     public static String cmd_dl = "cmd://";
     public static String quick_dl = "quick://";
+    public static String activity_dl = "activity://";
+    public static String activity_setting = "activity://setting";
 
     public static List<CardInfo> initIntent() {
         List<CardInfo> cardInfos = new ArrayList<>();

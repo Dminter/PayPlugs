@@ -35,6 +35,11 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
-
+    <style name="MyMaterialSettings" parent="MaterialSettingsTheme">
+        <item name="msColorPrimary">@color/colorPrimary</item>
+        <item name="msColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="msColorAccent">@color/colorAccent</item>
+        <item name="msColorHeader">@color/colorAccent</item>
+    </style>
 
 </resources>
