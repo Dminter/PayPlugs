@@ -8,7 +8,6 @@ import com.kenumir.materialsettings.items.CheckboxItem;
 import com.kenumir.materialsettings.items.DividerItem;
 import com.kenumir.materialsettings.items.TextItem;
 import com.kenumir.materialsettings.storage.StorageInterface;
-import com.zncm.dminter.payplugs.lawnchair.zncm.autocommand.AndroidCommand;
 import com.zncm.dminter.payplugs.lawnchair.zncm.data.Constant;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.SPHelper;
 import com.zncm.dminter.payplugs.lawnchair.zncm.utils.Xutils;
@@ -18,7 +17,7 @@ import com.zncm.dminter.payplugs.lawnchair.zncm.utils.Xutils;
  */
 
 public class SettingActivity extends MaterialSettings {
-    Activity ctx;
+    private Activity ctx;
 
     @Override
     public StorageInterface initStorageInterface() {
@@ -43,16 +42,7 @@ public class SettingActivity extends MaterialSettings {
 
             @Override
             public void onCheckedChange(CheckboxItem checkboxItem, boolean b) {
-
-//                if (b) {
-//                    int isRoot = Xutils.cmdExe("date");
-//                    if (isRoot == AndroidCommand.noRoot) {
-//                        Xutils.tShort("申请Root权限失败~");
-//                        return;
-//                    }
-                    SPHelper.setIsRootMode(ctx, b);
-//                }
-
+                SPHelper.setIsRootMode(ctx, b);
             }
         }).setDefaultValue(SPHelper.isRootMode(ctx)));
         addItem(new TextItem(ctx, "").setTitle("更新").setSubtitle("当前版本：" + Xutils.getAppVersion(ctx.getPackageName())).setOnclick(new TextItem.OnClickListener() {

@@ -21,8 +21,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Activity ctx;
-    List<CardInfo> cardInfos = new ArrayList<>();
+    private Activity ctx;
+    private List<CardInfo> cardInfos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
