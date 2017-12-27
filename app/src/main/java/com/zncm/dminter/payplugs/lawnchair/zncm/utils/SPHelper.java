@@ -8,6 +8,16 @@ import com.zncm.dminter.payplugs.App;
 
 
 public class SPHelper {
+    public static int getGridColumns(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getInt("grid_columns", 4);
+    }
+
+    public static void setGridColumns(Context context, int grid_columns) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putInt("grid_columns", grid_columns).commit();
+    }
+
 
 
     public static String getSuggestIntentByPkName(String pkgName) {

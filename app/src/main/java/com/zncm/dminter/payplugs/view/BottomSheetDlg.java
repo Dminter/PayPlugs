@@ -34,14 +34,19 @@ public abstract class BottomSheetDlg {
 
         final Dialog dialog = new Dialog(activity, R.style.MaterialDialogSheet);
         View view = activity.getLayoutInflater().inflate(R.layout.bottom_gridview, null);
-        if (Xutils.listNotNull(cardInfos) && cardInfos.size() >= 16) {
-            view = activity.getLayoutInflater().inflate(R.layout.bottom_gridview_half, null);
+        if (Xutils.listNotNull(cardInfos)) {
+            float hang = cardInfos.size() / SPHelper.getGridColumns(activity);
+            if (hang >= 4) {
+                view = activity.getLayoutInflater().inflate(R.layout.bottom_gridview_half, null);
+            }
         }
         GridView gridView = (GridView) view.findViewById(R.id.gridView);
+        gridView.setNumColumns(SPHelper.getGridColumns(activity));
+
         RelativeLayout popupWindow = (RelativeLayout) view.findViewById(R.id.popupWindow);
         SnowfallView mSnowfallView = (SnowfallView) view.findViewById(R.id.mSnowfallView);
 
-        if (SPHelper.isSnowFall(activity)){
+        if (SPHelper.isSnowFall(activity)) {
             mSnowfallView.setVisibility(View.VISIBLE);
         }
         popupWindow.setOnClickListener(new View.OnClickListener() {
