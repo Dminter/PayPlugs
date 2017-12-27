@@ -44,7 +44,6 @@ public abstract class BottomSheetDlg {
         if (SPHelper.isSnowFall(activity)){
             mSnowfallView.setVisibility(View.VISIBLE);
         }
-
         popupWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
