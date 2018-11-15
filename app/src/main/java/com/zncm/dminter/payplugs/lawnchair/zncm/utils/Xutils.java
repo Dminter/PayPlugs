@@ -135,7 +135,9 @@ public class Xutils {
         if (cmd.startsWith(SuggestIntent.activity_dl)) {
 //            cmd = cmd.substring(SuggestIntent.activity_dl.length());
             if (SuggestIntent.activity_setting.equals(cmd)){
-                App.getInstance().startActivity(new Intent( App.getInstance(),SettingActivity.class));
+                Intent intent =   new Intent( App.getInstance(),SettingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                App.getInstance().startActivity(intent);
             }
             return;
         }
