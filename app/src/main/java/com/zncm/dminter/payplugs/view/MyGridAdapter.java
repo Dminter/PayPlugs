@@ -1,6 +1,8 @@
 package com.zncm.dminter.payplugs.view;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.support.v7.widget.DrawableUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,16 +84,22 @@ public class MyGridAdapter extends BaseAdapter {
                 holder.text.setVisibility(View.GONE);
             }
 
-            if (Xutils.isNotEmptyOrNull(data.getIconUrl())) {
-//                holder.image.setVisibility(View.VISIBLE);
-                Glide.with(ctx).load(data.getIconUrl()).into(holder.image);
+//            if (Xutils.isNotEmptyOrNull(data.getIconUrl())) {
+////                holder.image.setVisibility(View.VISIBLE);
+//                Drawable drawableLoadFailed = ctx.getResources().getDrawable(R.drawable.ic_launcher);
+//                Glide.with(ctx).load(data.getIconUrl()).into(holder.image).onLoadFailed(drawableLoadFailed);
+//            } else {
+////                holder.image.setVisibility(View.GONE);
+//                if (data.getIconRes() != 0) {
+//                    holder.image.setImageResource(data.getIconRes());
+//                } else {
+//                    holder.image.setImageResource(R.drawable.ic_launcher);
+//                }
+//            }
+            if (data.getIconRes() != 0) {
+                holder.image.setImageResource(data.getIconRes());
             } else {
-//                holder.image.setVisibility(View.GONE);
-                if (data.getIconRes() != 0) {
-                    holder.image.setImageResource(data.getIconRes());
-                } else {
-                    holder.image.setImageResource(R.drawable.ic_launcher);
-                }
+                holder.image.setImageResource(R.drawable.ic_launcher);
             }
         }
     }

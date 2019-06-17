@@ -18,24 +18,23 @@ android {
     lintOptions {
         abortOnError false
     }
-    buildToolsVersion '27.0.3'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:25.0.0'
-    compile('cn.bmob.android:bmob-sdk:3.5.5') {
+    implementation('cn.bmob.android:bmob-sdk:3.5.5') {
         exclude group: 'com.google.code.gson'
         exclude group: 'com.squareup.okhttp3'
         exclude group: 'com.squareup.okio'
     }
-    compile 'com.alibaba:fastjson:1.1.59.android'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.alibaba:fastjson:1.1.59.android'
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
     // add library
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
-    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-    compile 'com.github.jetradarmobile:android-snowfall:1.1.6'
-    compile 'com.github.kenumir:MaterialSettings:v.1.2.2'
+    implementation 'com.github.jetradarmobile:android-snowfall:1.1.6'
+    implementation 'com.github.kenumir:MaterialSettings:v.1.2.2'
 }
